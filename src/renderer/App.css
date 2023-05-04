@@ -7,6 +7,9 @@ body {
   justify-content: center;
   overflow: hidden;
 }
+html {
+  background-color: transparent;
+}
 textarea {
   border: none;
   outline: none;
@@ -17,23 +20,29 @@ textarea {
   background-color: transparent;
   flex-grow: 1;
   height: 100vh;
-  
-  
 }
 
 /* tailwindcss components */
 .container {
+  backdrop-filter: blur(100px);
   width: 100vw;
   height: 100vh;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .editor {
   display: flex;
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  padding-top: 10px;
 }
 .input {
   color: #e5e7eb;
@@ -41,7 +50,6 @@ textarea {
   margin: 2rem;
   font-size: 1.25rem;
   word-wrap: break-word;
-  
 }
 .output {
   width: 50vw;
@@ -55,9 +63,6 @@ textarea {
   max-width: 100%;
   color: #10b981;
 }
-
-
-
 
 .warning {
   color: #f59e0b;
@@ -73,36 +78,34 @@ textarea {
   color: #3b82f6;
 }
 
-
 a {
   font-size: 3.5rem;
-  color: #1D1D28;
+  color: #1d1d28;
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 80vw;
   text-decoration: none;
-  }
-  
-  .title {
+  padding: 0;
+}
+
+.title {
   display: inline-block;
-  
-  }
-  
-  .title span {
+}
+
+.title span {
   font-size: 1.2rem;
-  }
+}
 
-
-
-.title,.title::after {
-  margin: 1rem;
+.title,
+.title::after {
+  margin-top: 1rem;
   padding: 10px 50px;
   border: none;
   border-radius: 5px;
   color: white;
   background-color: transparent;
   position: relative;
-  text-shadow: -1px -1px 0px #1df2f0, 1px 1px 0px #E94BE8;
+  text-shadow: -1px -1px 0px #1df2f0, 1px 1px 0px #e94be8;
 }
 
 .title::after {
@@ -125,13 +128,13 @@ a {
 .title:hover::after {
   animation: glitch_4011 1s;
   animation-timing-function: steps(2, end);
-  text-shadow: -3px -3px 0px #1df2f0, 3px 3px 0px #E94BE8;
+  text-shadow: -3px -3px 0px #1df2f0, 3px 3px 0px #e94be8;
   background-color: transparent;
   border: 3px solid #8b95ba;
 }
 
 .title:hover {
-  text-shadow: -2px -2px 0px #1df2f0, 2px 2px 0px #E94BE8;
+  text-shadow: -2px -2px 0px #1df2f0, 2px 2px 0px #e94be8;
 }
 
 .title:hover {
@@ -143,52 +146,52 @@ a {
 @keyframes glitch_4011 {
   0% {
     clip-path: var(--move1);
-    transform: translate(0px,-10px);
+    transform: translate(0px, -10px);
   }
 
   10% {
     clip-path: var(--move2);
-    transform: translate(-10px,10px);
+    transform: translate(-10px, 10px);
   }
 
   20% {
     clip-path: var(--move3);
-    transform: translate(10px,0px);
+    transform: translate(10px, 0px);
   }
 
   30% {
     clip-path: var(--move4);
-    transform: translate(-10px,10px);
+    transform: translate(-10px, 10px);
   }
 
   40% {
     clip-path: var(--move5);
-    transform: translate(10px,-10px);
+    transform: translate(10px, -10px);
   }
 
   50% {
     clip-path: var(--move6);
-    transform: translate(-10px,10px);
+    transform: translate(-10px, 10px);
   }
 
   60% {
     clip-path: var(--move1);
-    transform: translate(10px,-10px);
+    transform: translate(10px, -10px);
   }
 
   70% {
     clip-path: var(--move3);
-    transform: translate(-10px,10px);
+    transform: translate(-10px, 10px);
   }
 
   80% {
     clip-path: var(--move2);
-    transform: translate(10px,-10px);
+    transform: translate(10px, -10px);
   }
 
   90% {
     clip-path: var(--move4);
-    transform: translate(-10px,10px);
+    transform: translate(-10px, 10px);
   }
 
   100% {
@@ -196,4 +199,3 @@ a {
     transform: translate(0);
   }
 }
-

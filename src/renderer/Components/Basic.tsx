@@ -1,9 +1,9 @@
 import '.././App.css';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { evaluate } from 'mathjs';
-import calculate from '../basic'
-import "tailwindcss/tailwind.css";
+import calculate from '../basic';
+import 'tailwindcss/tailwind.css';
 
 export default function Basic() {
   // In this component, user can type in the container, and each line of the typed string is set to be the input state.
@@ -23,7 +23,7 @@ export default function Basic() {
     let newOutput = [];
     for (let i = 0; i < input.length; i++) {
       try {
-        console.log
+        console.log;
         let result = calculate(input[i]);
         if (typeof result === 'function') {
           newOutput.push('function?');
@@ -93,11 +93,14 @@ export default function Basic() {
 
   return (
     <div className="container">
-      <Link to="/advanced">
-        <span className='title '>Text Calculator<span >    Basic</span></span>
-        
-      </Link>
-      <div className='editor'>
+      <div className="header">
+        <Link to="/advanced">
+          <span className="title ">
+            Text Calculator<span> Basic</span>
+          </span>
+        </Link>
+      </div>
+      <div className="editor">
         <textarea
           value={input.join('\n')}
           onChange={handleInputChange}

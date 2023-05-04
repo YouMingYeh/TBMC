@@ -9,7 +9,7 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, shell, ipcMain, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -71,8 +71,14 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    width: 520,
+    height: 600,
+    minWidth: 480,
+    minHeight: 500,
+    vibrancy: 'under-window',
+    visualEffectState: 'active',
+    opacity: 0.9,
+    title: 'Text Base Math Calculator',
     icon: getAssetPath('calculator.png'),
     webPreferences: {
       preload: app.isPackaged

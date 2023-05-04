@@ -1,70 +1,67 @@
 import '.././App.css';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
-import advanced from '../advanced'
-import "tailwindcss/tailwind.css";
+import { Link } from 'react-router-dom';
+import advanced from '../advanced';
+import 'tailwindcss/tailwind.css';
 
 import { parse, simplify, evaluate } from 'mathjs';
-// const cannot be used since nerdamer gets modified when other modules are loaded  
-var nerdamer = require('nerdamer'); 
-// Load additional modules. These are not required.  
-require('nerdamer/Algebra'); 
-require('nerdamer/Calculus'); 
-require('nerdamer/Solve'); 
+// const cannot be used since nerdamer gets modified when other modules are loaded
+var nerdamer = require('nerdamer');
+// Load additional modules. These are not required.
+require('nerdamer/Algebra');
+require('nerdamer/Calculus');
+require('nerdamer/Solve');
 require('nerdamer/Extra');
-
 
 function evaluateExpression(input) {
   let result;
   try {
     // Try parsing input as an equation
 
-    if(input.includes('x') && input.includes('=')){
-        try{
-            var sol = nerdamer.solve(input, 'x');
-            if(sol.symbol[0]){
-                if(sol.symbol[0].value == '#')
-                    throw "err"
-            }
-            return 'x = ' + sol.text().toString()
-        } catch (error) {
-            const parts = input.split('=');
-            const left = parts[0].trim();
-            const right = parts[1].trim();
-            console.log(error)
-            if(left.includes('x') && right.includes('x')){
-                if(simplify(left).toString() == simplify(right).toString()){
-                    console.log
-                    return "TRUE"
-                } else {
-                    return "FALSE"
-                }
-            } 
+    if (input.includes('x') && input.includes('=')) {
+      try {
+        var sol = nerdamer.solve(input, 'x');
+        if (sol.symbol[0]) {
+          if (sol.symbol[0].value == '#') throw 'err';
         }
-        
-    }
-    
-    if(input.includes('=')){
+        return 'x = ' + sol.text().toString();
+      } catch (error) {
         const parts = input.split('=');
         const left = parts[0].trim();
         const right = parts[1].trim();
-        if(evaluate(left) == evaluate(right)){
-            return "TRUE"
-        } else {
-            return "FALSE"
+        console.log(error);
+        if (left.includes('x') && right.includes('x')) {
+          if (simplify(left).toString() == simplify(right).toString()) {
+            console.log;
+            return 'TRUE';
+          } else {
+            return 'FALSE';
+          }
         }
+      }
+    }
+
+    if (input.includes('=')) {
+      const parts = input.split('=');
+      const left = parts[0].trim();
+      const right = parts[1].trim();
+      if (evaluate(left) == evaluate(right)) {
+        return 'TRUE';
+      } else {
+        return 'FALSE';
+      }
     }
 
     // Try to simplify the equation
-    if(input.includes('x')){
-        result = simplify(input);
-        console.log(result)
-        return result
+    if (input.includes('x')) {
+      result = simplify(input);
+      console.log(result);
+      return result;
     }
     return evaluate(input);
-}catch (error) {
-    return "ERROR"
-}
+  } catch (error) {
+    return 'ERROR';
+  }
 }
 
 function solveEquation(equation, symbol) {
@@ -75,7 +72,6 @@ function solveEquation(equation, symbol) {
     return solved.map((node) => node.toString()).join(', ');
   }
 }
-
 
 export default function Advanced() {
   // In this component, user can type in the container, and each line of the typed string is set to be the input state.
@@ -95,8 +91,7 @@ export default function Advanced() {
     let newOutput = [];
     for (let i = 0; i < input.length; i++) {
       try {
-
-          let result = evaluateExpression(input[i]);
+        let result = evaluateExpression(input[i]);
         if (typeof result === 'function') {
           newOutput.push('function?');
         } else {
@@ -111,17 +106,14 @@ export default function Advanced() {
   };
 
   const applyStyles = (input) => {
-
     let output = input.split('\n').map((text) => {
-
-        if(text == 'TRUE' || text == 'FALSE') {
-            return `<span class="binary">${text}</span>`;
-        }
+      if (text == 'TRUE' || text == 'FALSE') {
+        return `<span class="binary">${text}</span>`;
+      }
       let cnt = 0;
       const operators = '+-*/';
       const endsWithOperator = operators.includes(text.slice(-1));
       if (endsWithOperator) return `<span class="warning">${text}</span>`;
-
 
       // Match operators and apply yellow color
       text = text.replace(/(\+|\-|\*|\/)/g, (match) => {
@@ -170,11 +162,14 @@ export default function Advanced() {
 
   return (
     <div className="container">
-      <Link  to="/">
-        <span className='title '>Text Calculator<span >    Advanced</span></span>
-        
-      </Link>
-      <div className='editor'>
+      <div className="header">
+        <Link to="/">
+          <span className="title ">
+            Text Calculator<span> Advanced</span>
+          </span>
+        </Link>
+      </div>
+      <div className="editor">
         <textarea
           value={input.join('\n')}
           onChange={handleInputChange}
